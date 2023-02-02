@@ -1,0 +1,393 @@
+{
+    "tags": [
+        {
+            "name": "Exports",
+            "description": "API методы для модуля \"Экспорты\""
+        }
+    ],
+    "paths": {
+        "/exports/manage/template": {
+            "put": {
+                "summary": "Настройка столбцов",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "requestBody": {
+                    "description": "Видимые поля массивом",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "use_template": {
+                                        "label": "Шаблон",
+                                        "type": "integer",
+                                        "example": 1
+                                    },
+                                    "change_template": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "label": "Шаблон",
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "name": {
+                                                "label": "Шаблон",
+                                                "type": "string",
+                                                "example": "Моя настройка"
+                                            },
+                                            "visible": {
+                                                "label": "Видимые столбцы",
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "example": [
+                                                    "field",
+                                                    "field",
+                                                    "field"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "Exports"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/_options"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/exports/manage/options": {
+            "options": {
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Exports"
+                ],
+                "summary": "Список столбцов",
+                "operationId": "getModuleOptions",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/_options"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/exports/manage": {
+            "get": {
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Exports"
+                ],
+                "summary": "Список",
+                "operationId": "getList",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Exports"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid id supplied",
+                        "content": {}
+                    },
+                    "401": {
+                        "description": "Access not allowed",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Object not found",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/exports/manage/create": {
+            "post": {
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Exports"
+                ],
+                "summary": "Добавление",
+                "description": "Добавление",
+                "operationId": "create",
+                "requestBody": {
+                    "description": "Created object",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ExportPost"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "422": {
+                        "description": "Data Validation Failed",
+                        "content": {}
+                    },
+                    "default": {
+                        "description": "successful operation",
+                        "content": {}
+                    }
+                },
+                "x-codegen-request-body-name": "body"
+            }
+        },
+        "/exports/manage/view/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Exports"
+                ],
+                "summary": "Просмотр",
+                "operationId": "getById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Export"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid id supplied",
+                        "content": {}
+                    },
+                    "401": {
+                        "description": "Access not allowed",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Object not found",
+                        "content": {}
+                    }
+                }
+            }
+        },
+        "/exports/manage/update/{id}": {
+            "put": {
+                "security": [
+                    {
+                        "basicAuth": [],
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Exports"
+                ],
+                "summary": "Обновление",
+                "description": "Обновление",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Обновление",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ExportPost"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "400": {
+                        "description": "Invalid supplied",
+                        "content": {}
+                    },
+                    "401": {
+                        "description": "Access not allowed",
+                        "content": {}
+                    },
+                    "404": {
+                        "description": "Object not found",
+                        "content": {}
+                    },
+                    "422": {
+                        "description": "Data Validation Failed",
+                        "content": {}
+                    }
+                },
+                "x-codegen-request-body-name": "body"
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ExportPost": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "label": "Тип",
+                        "type": "string"
+                    },
+                    "name": {
+                        "label": "Название",
+                        "type": "string"
+                    },
+                    "entity": {
+                        "label": "Сущность",
+                        "type": "string"
+                    },
+                    "filter": {
+                        "label": "Фильтр",
+                        "type": "string"
+                    },
+                    "file": {
+                        "label": "Файл",
+                        "type": "string"
+                    },
+                    "status": {
+                        "label": "Статус",
+                        "type": "string"
+                    },
+                    "percent": {
+                        "label": "Процент",
+                        "type": "integer"
+                    }
+                }
+            },
+            "Export": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "type": {
+                        "label": "Тип",
+                        "type": "string"
+                    },
+                    "name": {
+                        "label": "Название",
+                        "type": "string"
+                    },
+                    "entity": {
+                        "label": "Сущность",
+                        "type": "string"
+                    },
+                    "filter": {
+                        "label": "Фильтр",
+                        "type": "string"
+                    },
+                    "file": {
+                        "label": "Файл",
+                        "type": "string"
+                    },
+                    "status": {
+                        "label": "Статус",
+                        "type": "string"
+                    },
+                    "percent": {
+                        "label": "Процент",
+                        "type": "integer"
+                    },
+                    "completed_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "created_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": "string",
+                        "format": "date-time"
+                    }
+                }
+            },
+            "Exports": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Export"
+                        }
+                    },
+                    "_links": {
+                        "$ref": "#/components/schemas/_links"
+                    },
+                    "_meta": {
+                        "$ref": "#/components/schemas/_meta"
+                    }
+                }
+            }
+        }
+    }
+}

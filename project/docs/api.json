@@ -1,0 +1,96 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "API методы",
+        "description": "API",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://site.local:8181"
+        },
+        {
+            "url": "https://site.ru"
+        }
+    ],
+    "components": {
+        "schemas": {
+            "_links": {
+                "type": "object",
+                "properties": {
+                    "self": {
+                        "type": "object",
+                        "properties": {
+                            "href": {
+                                "type": "string",
+                                "format": "url"
+                            }
+                        }
+                    },
+                    "first": {
+                        "type": "object",
+                        "properties": {
+                            "href": {
+                                "type": "string",
+                                "format": "url"
+                            }
+                        }
+                    },
+                    "last": {
+                        "type": "object",
+                        "properties": {
+                            "href": {
+                                "type": "string",
+                                "format": "url"
+                            }
+                        }
+                    }
+                }
+            },
+            "_meta": {
+                "type": "object",
+                "properties": {
+                    "totalCount": {
+                        "type": "integer"
+                    },
+                    "pageCount": {
+                        "type": "integer"
+                    },
+                    "currentPage": {
+                        "type": "integer"
+                    },
+                    "perPage": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "_options": {
+                "type": "object",
+                "properties": {
+                    "template": {
+                        "label": "Шаблон",
+                        "type": "object"
+                    },
+                    "templates": {
+                        "label": "Шаблоны",
+                        "type": "object"
+                    },
+                    "fields": {
+                        "label": "Столбцы",
+                        "type": "object"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "basicAuth": {
+                "type": "http",
+                "scheme": "basic"
+            },
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}
